@@ -6,10 +6,17 @@ import 'package:vibration/vibration.dart';
 import 'package:cookie_of_the_day/model/TodoModel.dart';
 import 'package:cookie_of_the_day/service/Service.dart';
 
+//
+import 'package:cookie_of_the_day/service/Service.dart';
+import 'package:cookie_of_the_day/model/Todo.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'dart:math';
+
 class TodoOfTheDayPage extends StatelessWidget {
   //todo write code
-  static TodoService _service;
-  TodoModel _todos = TodoModel(_service);
+
+  TodoService _service;
+  List<Todo> todoList = [];
 
   //todo get List of Todo
 
@@ -22,13 +29,11 @@ class TodoOfTheDayPage extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.all(8.0),
           children: <Widget>[
-            for (int _x = 0;
-                _x < 12;
-                _x++) //(int _x = 0; _x = _todoList.legnth - 1 ; _x++)
+            for (int x = 0; x < todoList.length - 1; x++)
               Container(
                 height: 50,
                 color: Colors.amber[500],
-                child: const Center(child: Text('Chris')), // (_todoList[_x])),
+                child: const Center(child: Text (todoList[x].)),
               ),
           ],
         ),
