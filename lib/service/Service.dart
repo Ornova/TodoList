@@ -15,25 +15,22 @@ class TodoService {
     return Future<Null>.value(null);
   }
 
-  Future<Todo> addTodo(String wisdom, String author) async {
-    return Future<Todo>.value(_insertTodo(wisdom, author));
+  Future<Todo> addTodo(String wisdom) async {
+    return Future<Todo>.value(_insertTodo(wisdom));
   }
 
   TodoService() {
     _insertTodo(
-        'Frage dich nicht, was dein Land für dich tun kann, frage dich, was du für dein Land tun kannst.',
-        'Kim Jong Un');
+        'Frage dich nicht, was dein Land für dich tun kann, frage dich, was du für dein Land tun kannst.');
     _insertTodo(
-        'Ich wollte diesen Körper, und mir war egal was ich dafür tun musste',
-        'Donald Trump');
-    _insertTodo('How much is the fish?', 'Karl Marx');
-    _insertTodo(
-        'Mailand oder Madrid, hauptsache Italien', 'Benedikt der Sechzehnte');
-    _insertTodo('Viel zu lernen du noch hast.', 'Vicktor Ullate');
+        'Ich wollte diesen Körper, und mir war egal was ich dafür tun musste');
+    _insertTodo('How much is the fish?');
+    _insertTodo('Mailand oder Madrid, hauptsache Italien');
+    _insertTodo('Vicktor Ullate');
   }
 
-  _insertTodo(String text, String author) {
-    Todo todo = (Todo(nextId, text, author));
+  _insertTodo(String text) {
+    Todo todo = (Todo(nextId, text));
     _todos.add(todo);
     return todo;
   }

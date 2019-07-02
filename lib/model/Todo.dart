@@ -1,5 +1,5 @@
 class Todo {
-  final id, text, author;
+  final id, text;
 
-  Todo(this.id, this.text, this.author);
+  Todo(this.id, this.text);
 }
