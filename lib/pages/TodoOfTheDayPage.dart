@@ -15,95 +15,25 @@ class TodoOfTheDayPage extends StatelessWidget {
     return ScopedModelDescendant<TodoModel>(builder: (context, child, model) {
       return Scaffold(
         appBar: AppBar(title: Text('To Do List')),
-        body: Center(
-          child: Row(
-            children: <Widget>[
-              FlatButton(
-                color: Colors.blue,
-                textColor: Colors.white,
-                disabledColor: Colors.grey,
-                disabledTextColor: Colors.black,
-                padding: EdgeInsets.all(8.0),
-                splashColor: Colors.blueAccent,
-                onPressed: () {
-                  /*...*/
-                },
-                child: Text(
-                  "Flat Button",
-                  style: TextStyle(fontSize: 20.0),
-                ),
-              ),
-            ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () {
-              model.chooseRandomTodo();
-              Vibration();
-            }),
-      );
-    });
-  }
-
-  @override
-  Widget build2(BuildContext context) {
-    return ScopedModelDescendant<TodoModel>(builder: (context, child, model) {
-      return Scaffold(
-        appBar: AppBar(title: Text('To Do List 2')),
-        body: Center(
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                Text(
-                  '${model.actualTodo.text}',
-                  style: Theme.of(context).textTheme.display1,
-                ),
-                Text(
-                  '${model.actualTodo.author}',
-                  style: Theme.of(context).textTheme.display1,
-                )
-              ],
+        body: ListView(
+          padding: const EdgeInsets.all(8.0),
+          children: <Widget>[
+            for (int _x = 0; _x < 12; _x++) //(int _x = 0; _x = _todoList.legnth - 1 ; _x++)
+            Container(
+              height: 50,
+              color: Colors.amber[500],
+              child: const Center(child: Text('Chris')), // (_todoList[_x])),
             ),
-          ),
+          ],
         ),
-        floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () {
-              model.chooseRandomTodo();
-              Vibration();
-            }),
-      );
-    });
-  }
 
-  @override
-  Widget build3(BuildContext context) {
-    return ScopedModelDescendant<TodoModel>(builder: (context, child, model) {
-      return Scaffold(
-        appBar: AppBar(title: Text('To Do List 3')),
-        body: Center(
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                Text(
-                  '${model.actualTodo.text}',
-                  style: Theme.of(context).textTheme.display1,
-                ),
-                Text(
-                  '${model.actualTodo.author}',
-                  style: Theme.of(context).textTheme.display1,
-                )
-              ],
-            ),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
+        // todo Button: Implement later
+        /*floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: () {
               model.chooseRandomTodo();
               Vibration();
-            }),
+            }),*/
       );
     });
   }
