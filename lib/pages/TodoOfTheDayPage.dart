@@ -17,7 +17,16 @@ class TodoOfTheDayPage extends StatelessWidget {
         appBar: AppBar(title: Text('To Do List')),
         body: Center(
           child: Column(
-            children: <Widget>[],
+            children: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  /*...*/
+                },
+                child: Text(
+                  "Flat Button",
+                ),
+              ),
+            ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
