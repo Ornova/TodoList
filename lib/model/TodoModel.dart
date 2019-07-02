@@ -4,7 +4,6 @@ import 'package:scoped_model/scoped_model.dart';
 import 'dart:math';
 
 class TodoModel extends Model {
-
   static final Random rnd = Random();
   TodoService _service;
   Todo _actualTodo;
@@ -14,11 +13,7 @@ class TodoModel extends Model {
     _getTodoList();
   }
 
-  get actualTodo =>
-      _actualTodo != null
-          ? _actualTodo
-          : Todo(-1, 'Help', 'me.')
-  ;
+  get actualTodo => _actualTodo != null ? _actualTodo : Todo(-1, 'Help', 'me.');
 
   Todo chooseRandomTodo() {
     _actualTodo = _todoList.isEmpty
@@ -27,18 +22,14 @@ class TodoModel extends Model {
     notifyListeners();
   }
 
-
   _getTodoList() {
     _service.getAllTodos().then((todos) {
       _todoList = todos;
     }).catchError((_) {
       _todoList = [];
-    }
-    ).whenComplete(() {
+    }).whenComplete(() {
       chooseRandomTodo();
       notifyListeners();
-    }
-    );
+    });
   }
-
 }

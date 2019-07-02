@@ -21,9 +21,6 @@ class TodoApp extends StatelessWidget {
         home: ScopedModel(
           model: _todoModel,
           child: TodoOfTheDayPage(),
-        )
-    );
+        ));
   }
 }
-
-
