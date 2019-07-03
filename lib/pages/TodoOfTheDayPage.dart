@@ -15,10 +15,6 @@ import 'dart:math';
 
 class TodoOfTheDayPage extends StatelessWidget {
   //todo write code
-
-  static TodoService service;
-  TodoModel todoModel = TodoModel(service);
-
   //todo get List of Todo
 
   @override
