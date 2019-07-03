@@ -60,6 +60,7 @@ class TodoListState extends State<TodoList> {
   // Build a single todo item
   Widget _buildTodoItem(String todoText, int index) {
     return new ListTile(
+      //todo Color
             contentPadding: EdgeInsets.fromLTRB(11, 0, 1, 0),
             title: new Text(todoText),
             onTap: () => _promptRemoveTodoItem(index)
