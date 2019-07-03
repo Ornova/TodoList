@@ -2,7 +2,6 @@ import 'package:cookie_of_the_day/model/Todo.dart';
 
 class TodoService {
   Future<List<Todo>> getAllTodos() async {
-    //http.get('myServer.com/cookies')
     return Future<List<Todo>>.value(_todos);
   }
 
@@ -32,7 +31,6 @@ class TodoService {
   _insertTodo(String text) {
     Todo todo = (Todo(nextId, text));
     _todos.add(todo);
-    return todo;
   }
 
   List<Todo> _todos = [];

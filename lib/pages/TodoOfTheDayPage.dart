@@ -29,12 +29,7 @@ class TodoOfTheDayPage extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.all(8.0),
           children: <Widget>[
-            for (int x = 0; x < todoModel.getTodoListLength() - 1; x++)
-              Container(
-                height: 50,
-                color: Colors.amber[500],
-                child: const Center(child: Text ('1')),//(todoList.getAllTodos2();)),
-              ),
+            buildContainers()
           ],
         ),
 
@@ -47,5 +42,14 @@ class TodoOfTheDayPage extends StatelessWidget {
             }),*/
       );
     });
+  }
+
+  buildContainers() {
+    for (int x = 0; x < todoModel.getTodoListLength() - 1; x++)
+      Container(
+        height: 50,
+        color: Colors.amber[500],
+        child: const Center(child: Text('1')), //(todoList.getAllTodos2();)),
+      );
   }
 }
