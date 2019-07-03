@@ -6,7 +6,7 @@ class TodoListState extends State<TodoList> {
 
   void _addTodoItem(String task) {
     // Only add the task if the user actually entered something
-    if(task.length > 0) {
+    if (task.length > 0) {
       // Putting our code inside "setState" tells the app that our state has changed, and
       // it will automatically re-render the list
       setState(() => _todoItems.add(task));
@@ -50,7 +50,7 @@ class TodoListState extends State<TodoList> {
         // itemBuilder will be automatically be called as many times as it takes for the
         // list to fill up its available space, which is most likely more than the
         // number of todo items we have. So, we need to check the index is OK.
-        if(index < _todoItems.length) {
+        if (index < _todoItems.length) {
           return _buildTodoItem(_todoItems[index], index);
         }
       },
@@ -60,9 +60,10 @@ class TodoListState extends State<TodoList> {
   // Build a single todo item
   Widget _buildTodoItem(String todoText, int index) {
     return new ListTile(
-        title: new Text(todoText),
-        onTap: () => _promptRemoveTodoItem(index)
-    );
+            contentPadding: EdgeInsets.fromLTRB(11, 0, 1, 0),
+            title: new Text(todoText),
+            onTap: () => _promptRemoveTodoItem(index)
+        );
   }
 
   @override

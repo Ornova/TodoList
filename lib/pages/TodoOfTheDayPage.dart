@@ -17,21 +17,6 @@ class TodoOfTheDayPage extends StatelessWidget {
   List<Todo> _todos = [];
   //todo write code
   //todo get List of Todo
-//  @override
-//  Widget build(BuildContext context) {
-//    return Column(
-//      children: <Widget>[
-//        for (int x = 0; x < - 1*/ 8; x++)
-//          Container(
-//            height: 50,
-//            color: Colors.amber[500],
-//            child:
-//            const Center(child: Text('text')), //(todoList.getAllTodos2();)),
-//          ),
-//      ],
-//    );
-//  }
-
 
   buildContainers() {
     for (int x = 0; x < /*todoModel.getTodoListLength() - 1*/ 8; x++)
