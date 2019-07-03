@@ -45,7 +45,7 @@ class TodoOfTheDayPage extends StatelessWidget {
   }
 
   buildContainers() {
-    for (int x = 0; x < todoModel.getTodoListLength() - 1; x++)
+    for (int x = 0; x < /*todoModel.getTodoListLength() - 1*/8; x++)
       Container(
         height: 50,
         color: Colors.amber[500],

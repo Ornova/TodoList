@@ -6,18 +6,19 @@ class TodoModel extends Model {
   TodoService _service;
   List<Todo> todoList = [];
 
+
   TodoModel(this._service) {
     getTodoList();
     getTodoListLength();
   }
 
   getTodoList() {
-    _service.getAllTodos().then((todos) {
-      todoList = todos;
+    _service.getAllTodos().then((_todos) {
+      todoList = _todos;
     }).catchError((_) {
       todoList = [];
     }).whenComplete(() {
-      return todoList;
+
     });
   }
 
