@@ -74,15 +74,25 @@ class TodoListState extends State<TodoList> {
       appBar: new AppBar(
         title: new Text('Todo List'),
         actions: <Widget>[
+
           new IconButton(
+
               //todo monentary weather
+
               icon: new Icon(Icons.location_on),
+
               onPressed: () {
+
                 showDialog(
+
                     context: context,
+
                     builder: (context) {
+
                       return GetLocationPage();
+
                     });
+
               }),
           new IconButton(
               icon: new Icon(Icons.menu),
