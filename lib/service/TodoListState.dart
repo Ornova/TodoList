@@ -74,11 +74,21 @@ class TodoListState extends State<TodoList> {
           title: new Text('Todo List')
       ),
       body: _buildTodoList(),
-      floatingActionButton: new FloatingActionButton(
-          onPressed: _pushAddTodoScreen,
-          tooltip: 'Add task',
-          child: new Icon(Icons.add)
+//      floatingActionButton: new FloatingActionButton(
+//          onPressed: _pushAddTodoScreen,
+//          tooltip: 'Add tasktfrttcxt',
+//          child: new Icon(Icons.add)
+//
+    floatingActionButton: Theme(
+      data: Theme.of(context).copyWith(
+        colorScheme:
+        Theme.of(context).colorScheme.copyWith(secondary: Colors.yellow),
       ),
+      child: FloatingActionButton(
+        onPressed: _pushAddTodoScreen,
+        child: Icon(Icons.add),
+      ),
+    ),
     );
   }
 

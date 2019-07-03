@@ -41,12 +41,12 @@ class TodoOfTheDayPage extends StatelessWidget {
 //        ),
 //
 //        // todo Button: Implement later
-//        /*floatingActionButton: FloatingActionButton(
+//      floatingActionButton: FloatingActionButton(
 //            child: Icon(Icons.add),
 //            onPressed: () {
 //              model.chooseRandomTodo();
 //              Vibration();
-//            }),*/
+//            }),
 //      );
 //    });
  }
