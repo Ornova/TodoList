@@ -6,7 +6,6 @@ class TodoModel extends Model {
   TodoService _service;
   List<Todo> todoList = [];
 
-
   TodoModel(this._service) {
     getTodoList();
     getTodoListLength();
@@ -17,9 +16,7 @@ class TodoModel extends Model {
       todoList = _todos;
     }).catchError((_) {
       todoList = [];
-    }).whenComplete(() {
-
-    });
+    }).whenComplete(() {});
   }
 
   getTodoListLength() {
@@ -32,7 +29,7 @@ class TodoModel extends Model {
     });
   }
 
-  /*getAllTodos2() {
+/*getAllTodos2() {
 
   }*/
 }

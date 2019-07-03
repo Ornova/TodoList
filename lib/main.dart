@@ -25,12 +25,13 @@ class TodoApp extends StatelessWidget {
           // text styling for headlines, titles, bodies of text, and more.
           textTheme: TextTheme(
             headline: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
-            title: TextStyle(fontSize: 30.0, backgroundColor: Color.fromRGBO(100, 149, 237,1)),
-            body1: TextStyle(fontSize: 30.0, fontFamily: 'Hind'),
+            title: TextStyle(
+                fontSize: 30.0,
+                backgroundColor: Color.fromRGBO(115, 150, 200, 0.2)),
+            body1: TextStyle(fontSize: 30.0, fontFamily: 'Roboto'),
           ),
         ),
         title: 'Todo List',
-        home: new TodoList()
-    );
+        home: new TodoList());
   }
 }
