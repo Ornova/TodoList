@@ -30,4 +30,8 @@ class TodoModel extends Model {
       return todoList.length;
     });
   }
+
+  /*getAllTodos2() {
+
+  }*/
 }
