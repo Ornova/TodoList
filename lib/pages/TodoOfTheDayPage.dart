@@ -33,7 +33,7 @@ class TodoOfTheDayPage extends StatelessWidget {
               Container(
                 height: 50,
                 color: Colors.amber[500],
-                child: const Center(child: Text (todoList[x].)),
+         //       child: const Center(child: Text (todoList[x].)),
               ),
           ],
         ),
