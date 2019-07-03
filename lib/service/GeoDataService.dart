@@ -32,6 +32,8 @@ class _GetLocationPageState extends State<GetLocationPage> {
                     userLocation["longitude"].toString()),
             //todo Wetter
             // https://www.metaweather.com/api/#location
+            //todo Substring woeid
+            // https://www.metaweather.com/api/location/search/?lattlong=47.377060,8.539550
           ],
         ),
       ),
