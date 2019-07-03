@@ -61,7 +61,40 @@ class TodoListState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text('Todo List')),
+      appBar: new AppBar(
+        title: new Text('Todo List'),
+        actions: <Widget>[
+          new IconButton(
+            icon: new Icon(Icons.search),
+            onPressed: () {
+//              showDialog(
+//                  context: context,
+//                  builder: (context) {
+//                    Future.delayed(Duration(seconds: 5), () {
+//                      Navigator.of(context).pop(true);
+//                    });
+//                    return AlertDialog(
+//                      title: Text('Not yet implrmented'), //Todo),
+//                    );
+//                  });
+            },
+          ),
+          new IconButton(
+              icon: new Icon(Icons.menu),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      Future.delayed(Duration(seconds: 5), () {
+                        Navigator.of(context).pop(true);
+                      });
+                      return AlertDialog(
+                        title: Text('Not yet implrmented'), //Todo),
+                      );
+                    });
+              }),
+        ],
+      ),
       body: _buildTodoList(),
       floatingActionButton: Theme(
         data: Theme.of(context).copyWith(
@@ -85,37 +118,6 @@ class TodoListState extends State<TodoList> {
       return new Scaffold(
           appBar: new AppBar(
             title: new Text('Add a new task'),
-            actions: <Widget>[
-              new IconButton(
-                icon: new Icon(Icons.search),
-                onPressed: () {
-//              showDialog(
-//                  context: context,
-//                  builder: (context) {
-//                    Future.delayed(Duration(seconds: 5), () {
-//                      Navigator.of(context).pop(true);
-//                    });
-//                    return AlertDialog(
-//                      title: Text('Not yet implrmented'), //Todo),
-//                    );
-//                  });
-                },
-              ),
-              new IconButton(
-                  icon: new Icon(Icons.menu),
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          Future.delayed(Duration(seconds: 5), () {
-                            Navigator.of(context).pop(true);
-                          });
-                          return AlertDialog(
-                            title: Text('Not yet implrmented'), //Todo),
-                          );
-                        });
-                  }),
-            ],
           ),
           body: new TextField(
             autofocus: true,
