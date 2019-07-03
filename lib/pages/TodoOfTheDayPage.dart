@@ -15,8 +15,8 @@ import 'dart:math';
 class TodoOfTheDayPage extends StatelessWidget {
   //todo write code
 
-  TodoService _service;
-  TodoModel todoModel = TodoModel(_service);
+  TodoService service;
+  TodoModel todoModel = TodoModel(service);
 
   //todo get List of Todo
 
