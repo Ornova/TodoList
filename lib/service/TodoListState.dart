@@ -1,10 +1,10 @@
 import 'package:cookie_of_the_day/model/TodoList.dart';
 import 'package:flutter/material.dart';
 import 'package:cookie_of_the_day/service/GeoDataService.dart';
+import 'package:flutter/services.dart';
 
 class TodoListState extends State<TodoList> {
   List<String> _todoItems = [];
-  GetLocationPage glp = new GetLocationPage();
 
   void _addTodoItem(String task) {
     // Only add the task if the user actually entered something
@@ -75,13 +75,17 @@ class TodoListState extends State<TodoList> {
         title: new Text('Todo List'),
         actions: <Widget>[
           new IconButton(
-              //todo monentary weather
-              icon: new Icon(Icons.location_on),
+              icon: new Icon(Icons.search),
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      return GetLocationPage();
+                      Future.delayed(Duration(seconds: 4), () {
+                        Navigator.of(context).pop(true);
+                      });
+                      return AlertDialog(
+                        title: Text('Not yet implemented'), //Todo),
+                      );
                     });
               }),
           new IconButton(
@@ -101,6 +105,7 @@ class TodoListState extends State<TodoList> {
         ],
       ),
       body: _buildTodoList(),
+
       floatingActionButton: Theme(
         data: Theme.of(context).copyWith(
           colorScheme:
