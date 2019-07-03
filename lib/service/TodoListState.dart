@@ -83,7 +83,40 @@ class TodoListState extends State<TodoList> {
         // a back button to close it
         new MaterialPageRoute(builder: (context) {
       return new Scaffold(
-          appBar: new AppBar(title: new Text('Add a new task')),
+          appBar: new AppBar(
+            title: new Text('Add a new task'),
+            actions: <Widget>[
+              new IconButton(
+                icon: new Icon(Icons.search),
+                onPressed: () {
+//              showDialog(
+//                  context: context,
+//                  builder: (context) {
+//                    Future.delayed(Duration(seconds: 5), () {
+//                      Navigator.of(context).pop(true);
+//                    });
+//                    return AlertDialog(
+//                      title: Text('Not yet implrmented'), //Todo),
+//                    );
+//                  });
+                },
+              ),
+              new IconButton(
+                  icon: new Icon(Icons.menu),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          Future.delayed(Duration(seconds: 5), () {
+                            Navigator.of(context).pop(true);
+                          });
+                          return AlertDialog(
+                            title: Text('Not yet implrmented'), //Todo),
+                          );
+                        });
+                  }),
+            ],
+          ),
           body: new TextField(
             autofocus: true,
             onSubmitted: (val) {
