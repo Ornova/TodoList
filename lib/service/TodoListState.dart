@@ -46,26 +46,22 @@ class TodoListState extends State<TodoList> {
   // Build the whole list of todo items
   Widget _buildTodoList() {
     return new ListView.builder(
+        itemCount: _todoItems.length,
 
-      itemBuilder: (context, index) {
+        itemBuilder: (context, index) => Container (
 
-        // itemBuilder will be automatically be called as many times as it takes for the
-        // list to fill up its available space, which is most likely more than the
-        // number of todo items we have. So, we need to check the index is OK.
-        if (index < _todoItems.length) {
-          return _buildTodoItem(_todoItems[index], index);
-        }
-      },
+    color: Colors.red,
+          child: new ListTile(
+    title: new Text("${_todoItems[index]}"),
+    onTap: () => _promptRemoveTodoItem(index)
+    ),
+    ),
     );
   }
 
   // Build a single todo item
   Widget _buildTodoItem(String todoText, int index) {
-    int _act = 1;
-    return new ListTile(
-        title: const Text('Trix\'s airplane'),
-            onTap: () => _promptRemoveTodoItem(index)
-        );
+
   }
 
   @override
