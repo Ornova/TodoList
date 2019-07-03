@@ -14,32 +14,57 @@ import 'package:scoped_model/scoped_model.dart';
 import 'dart:math';
 
 class TodoOfTheDayPage extends StatelessWidget {
+  List<Todo> _todos = [];
   //todo write code
   //todo get List of Todo
+//  @override
+//  Widget build(BuildContext context) {
+//    return Column(
+//      children: <Widget>[
+//        for (int x = 0; x < - 1*/ 8; x++)
+//          Container(
+//            height: 50,
+//            color: Colors.amber[500],
+//            child:
+//            const Center(child: Text('text')), //(todoList.getAllTodos2();)),
+//          ),
+//      ],
+//    );
+//  }
 
+
+  buildContainers() {
+    for (int x = 0; x < /*todoModel.getTodoListLength() - 1*/ 8; x++)
+      Container(
+        height: 50,
+        color: Colors.amber[500],
+        child: const Center(child: Text('1')), //(todoList.getAllTodos2();)),
+      );
+  }
+//
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return ScopedModelDescendant<TodoModel>(builder: (context, child, model) {
-      return Scaffold(
-        appBar: AppBar(title: Text('To Do List')),
-        body: ListView(
-          padding: const EdgeInsets.all(8.0),
-          children: <Widget>[
-            AllTodos()
-          ],
-        ),
-
-        // todo Button: Implement later
-        /*floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () {
-              model.chooseRandomTodo();
-              Vibration();
-            }),*/
-      );
-    });
-  }
+//    // TODO: implement build
+//    return ScopedModelDescendant<TodoModel>(builder: (context, child, model) {
+//      return Scaffold(
+//        appBar: AppBar(title: Text('To Do List')),
+//        body: ListView(
+//          padding: const EdgeInsets.all(8.0),
+//          children: <Widget>[
+//            AllTodos()
+//          ],
+//        ),
+//
+//        // todo Button: Implement later
+//        /*floatingActionButton: FloatingActionButton(
+//            child: Icon(Icons.add),
+//            onPressed: () {
+//              model.chooseRandomTodo();
+//              Vibration();
+//            }),*/
+//      );
+//    });
+ }
 
 
 }

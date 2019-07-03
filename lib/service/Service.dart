@@ -17,7 +17,7 @@ class TodoService {
   Future<Todo> addTodo(String wisdom) async {
     return Future<Todo>.value(_insertTodo(wisdom));
   }
-
+  List<Todo> _todos = [];
   TodoService() {
     _insertTodo(
         'Frage dich nicht, was dein Land für dich tun kann, frage dich, was du für dein Land tun kannst.');
@@ -31,10 +31,8 @@ class TodoService {
   _insertTodo(String text) {
     Todo todo = (Todo(nextId, text));
     _todos.add(todo);
+    //return todo;
   }
-
-  List<Todo> _todos = [];
   static int _nextId = 1;
-
   static get nextId => _nextId++;
 }

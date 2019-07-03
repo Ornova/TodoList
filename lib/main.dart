@@ -4,23 +4,16 @@ import 'package:cookie_of_the_day/service/Service.dart';
 import 'package:cookie_of_the_day/pages/TodoOfTheDayPage.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-void main() => runApp(TodoApp(TodoModel(TodoService())));
+import 'model/TodoList.dart';
+
+void main() => runApp(new TodoApp());
 
 class TodoApp extends StatelessWidget {
-  TodoModel _todoModel;
-
-  TodoApp(this._todoModel);
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.pink,
-        ),
-        home: ScopedModel(
-          model: _todoModel,
-          child: TodoOfTheDayPage(),
-        ));
+    return new MaterialApp(
+        title: 'Todo List',
+        home: new TodoList()
+    );
   }
 }
