@@ -28,50 +28,40 @@ class TodoListState extends State<TodoList> {
                     child: new Text('CANCEL'),
                     // The alert is actually part of the navigation stack, so to close it, we
                     // need to pop it.
-                    onPressed: () => Navigator.of(context).pop()
-                ),
+                    onPressed: () => Navigator.of(context).pop()),
                 new FlatButton(
                     child: new Text('MARK AS DONE'),
                     onPressed: () {
                       _removeTodoItem(index);
                       Navigator.of(context).pop();
-                    }
-                )
-              ]
-          );
-        }
-    );
+                    })
+              ]);
+        });
   }
 
   // Build the whole list of todo items
   Widget _buildTodoList() {
     return new ListView.separated(
       separatorBuilder: (context, index) => Divider(
-        color: Colors.white,
-      ),
-        itemCount: _todoItems.length,
-
-        itemBuilder: (context, index) => Container (
-    color: Colors.black,
-          child: new ListTile(
-    title: new Text("${_todoItems[index]}"),
-    onTap: () => _promptRemoveTodoItem(index)
-    ),
-    ),
+            color: Colors.white,
+          ),
+      itemCount: _todoItems.length,
+      itemBuilder: (context, index) => Container(
+            color: Colors.black,
+            child: new ListTile(
+                title: new Text("${_todoItems[index]}"),
+                onTap: () => _promptRemoveTodoItem(index)),
+          ),
     );
   }
 
   // Build a single todo item
-  Widget _buildTodoItem(String todoText, int index) {
-
-  }
+  Widget _buildTodoItem(String todoText, int index) {}
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-          title: new Text('Todo List')
-      ),
+      appBar: new AppBar(title: new Text('Todo List')),
       body: _buildTodoList(),
       floatingActionButton: Theme(
         data: Theme.of(context).copyWith(
@@ -89,28 +79,21 @@ class TodoListState extends State<TodoList> {
   void _pushAddTodoScreen() {
     // Push this page onto the stack
     Navigator.of(context).push(
-      // MaterialPageRoute will automatically animate the screen entry, as well as adding
-      // a back button to close it
-        new MaterialPageRoute(
-            builder: (context) {
-              return new Scaffold(
-                  appBar: new AppBar(
-                      title: new Text('Add a new task')
-                  ),
-                  body: new TextField(
-                    autofocus: true,
-                    onSubmitted: (val) {
-                      _addTodoItem(val);
-                      Navigator.pop(context); // Close the add todo screen
-                    },
-                    decoration: new InputDecoration(
-                        hintText: 'Enter something to do...',
-                        contentPadding: const EdgeInsets.all(16.0)
-                    ),
-                  )
-              );
-            }
-        )
-    );
+        // MaterialPageRoute will automatically animate the screen entry, as well as adding
+        // a back button to close it
+        new MaterialPageRoute(builder: (context) {
+      return new Scaffold(
+          appBar: new AppBar(title: new Text('Add a new task')),
+          body: new TextField(
+            autofocus: true,
+            onSubmitted: (val) {
+              _addTodoItem(val);
+              Navigator.pop(context); // Close the add todo screen
+            },
+            decoration: new InputDecoration(
+                hintText: 'Enter something to do...',
+                contentPadding: const EdgeInsets.all(16.0)),
+          ));
+    }));
   }
 }
