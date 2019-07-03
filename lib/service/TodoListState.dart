@@ -43,12 +43,20 @@ class TodoListState extends State<TodoList> {
   Widget _buildTodoList() {
     return new ListView.separated(
       separatorBuilder: (context, index) => Divider(
-            color: Colors.white,
+            color: Color.fromARGB(0, 0, 0, 0),
+            height: 0,
           ),
       itemCount: _todoItems.length,
       itemBuilder: (context, index) => Container(
-            color: Colors.black,
+            decoration: BoxDecoration(
+              color: Colors.black54,
+              borderRadius: BorderRadius.all(
+                Radius.circular(20.0),
+              ),
+            ),
+            margin: EdgeInsets.fromLTRB(6, 8, 6, 0),
             child: new ListTile(
+                contentPadding: const EdgeInsets.fromLTRB(9, 0, 9, 0),
                 title: new Text("${_todoItems[index]}"),
                 onTap: () => _promptRemoveTodoItem(index)),
           ),
@@ -65,37 +73,37 @@ class TodoListState extends State<TodoList> {
         title: new Text('Todo List'),
         actions: <Widget>[
           new IconButton(
-            icon: new Icon(Icons.search),
-            onPressed: () {
-//              showDialog(
-//                  context: context,
-//                  builder: (context) {
-//                    Future.delayed(Duration(seconds: 5), () {
-//                      Navigator.of(context).pop(true);
-//                    });
-//                    return AlertDialog(
-//                      title: Text('Not yet implrmented'), //Todo),
-//                    );
-//                  });
-            },
-          ),
+              icon: new Icon(Icons.search),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      Future.delayed(Duration(seconds: 4), () {
+                        Navigator.of(context).pop(true);
+                      });
+                      return AlertDialog(
+                        title: Text('Not yet implemented'), //Todo),
+                      );
+                    });
+              }),
           new IconButton(
               icon: new Icon(Icons.menu),
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      Future.delayed(Duration(seconds: 5), () {
+                      Future.delayed(Duration(seconds: 4), () {
                         Navigator.of(context).pop(true);
                       });
                       return AlertDialog(
-                        title: Text('Not yet implrmented'), //Todo),
+                        title: Text('Not yet implemented'), //Todo),
                       );
                     });
               }),
         ],
       ),
       body: _buildTodoList(),
+
       floatingActionButton: Theme(
         data: Theme.of(context).copyWith(
           colorScheme:
