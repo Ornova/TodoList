@@ -21,28 +21,17 @@ class _GetLocationPageState extends State<GetLocationPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             userLocation == null
-                ? CircularProgressIndicator()
+                ? _getLocation().then((value) {
+                    setState(() {
+                      userLocation = value;
+                    });
+                  })
                 : Text("Location:" +
                     userLocation["latitude"].toString() +
                     " " +
                     userLocation["longitude"].toString()),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: RaisedButton(
-                onPressed: () {
-                  _getLocation().then((value) {
-                    setState(() {
-                      userLocation = value;
-                    });
-                  });
-                },
-                color: Colors.blue,
-                child: Text(
-                  "Get Location",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
+            //todo Wetter
+            // https://www.metaweather.com/api/#location
           ],
         ),
       ),
