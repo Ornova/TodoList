@@ -73,7 +73,8 @@ class TodoListState extends State<TodoList> {
         title: new Text('Todo List'),
         actions: <Widget>[
           new IconButton(
-              icon: new Icon(Icons.search),
+              //todo monentary weather
+              icon: new Icon(Icons.wb_sunny),
               onPressed: () {
                 showDialog(
                     context: context,
