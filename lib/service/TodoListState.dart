@@ -78,13 +78,21 @@ class TodoListState extends State<TodoList> {
           new IconButton(
 
               //todo monentary weather
+
               icon: new Icon(Icons.location_on),
+
               onPressed: () {
+
                 showDialog(
+
                     context: context,
+
                     builder: (context) {
+
                       return GetLocationPage();
+
                     });
+
               }),
           new IconButton(
               icon: new Icon(Icons.menu),
