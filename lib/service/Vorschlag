@@ -65,24 +65,24 @@ getWoeid() {
     int start_weather_state_abbr;
     int ende_min_temp;
     int start_min_temp;
-    int ende_3;
-    int start_2;
+    int ende_the_temp;
+    int start_the_temp;
     ende_weather_state_abbr = string.indexOf('wind_direction_compass');
     ende_weather_state_abbr = ende_weather_state_abbr - 3;
     start_weather_state_abbr = string.indexOf('weather_state_abbr');
     start_weather_state_abbr = start_weather_state_abbr + 21;
     string = string.substring(start_weather_state_abbr, ende_weather_state_abbr);
 
-    ende_weather_state_abbr = string.indexOf('wind_direction_compass');
-    ende_weather_state_abbr = ende_weather_state_abbr - 3;
-    start_weather_state_abbr = string.indexOf('weather_state_abbr');
-    start_weather_state_abbr = start_weather_state_abbr + 21;
+    ende_weather_the_temp = string.indexOf('wind_speed');
+    ende_weather_the_temp = ende_the_temp - 2;
+    start_weather_the_temp = string.indexOf('the_temp');
+    start_weather_the_temp = start_the_temp + 10;
     string = string.substring(start_weather_state_abbr, ende_weather_state_abbr);
 
-    ende_weather_state_abbr = string.indexOf('wind_direction_compass');
-    ende_weather_state_abbr = ende_weather_state_abbr - 3;
-    start_weather_state_abbr = string.indexOf('weather_state_abbr');
-    start_weather_state_abbr = start_weather_state_abbr + 21;
+    ende_min_temp = string.indexOf('max_temp');
+    ende_min_temp = ende_min_temp - 2;
+    start_min_temp = string.indexOf('min_temp');
+    start_min_temp= start_min_temp + 10;
     string = string.substring(start_weather_state_abbr, ende_weather_state_abbr);
     return string;
   }
