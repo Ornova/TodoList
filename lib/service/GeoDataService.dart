@@ -42,7 +42,7 @@ class _GetLocationPageState extends State<GetLocationPage> {
                       userLocation = value;
                     });
                   })
-                : Text(cutYear() + "/" + cutMonth() + "/" + cutDay()),useless == 0?getWeather().then((value) {setState(() {useless = 1;});}): Container(child: Row(children: <Widget>[],))
+                : Text(cutYear() + "/" + cutMonth() + "/" + cutDay()),useless == 0?getWeather().then((value) {setState(() {useless = 1;});}): Container(child: Row(children: <Widget>[],)),
             //todo Substring woeid
             // 'https://www.metaweather.com/api/location/search/?lattlong='+userLocation["latitude"].toString()+","+userLocation["longitude"].toString()
             // https://www.metaweather.com/api/location/search/?lattlong=47.377060,8.539550
