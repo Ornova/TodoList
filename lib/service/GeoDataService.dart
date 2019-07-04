@@ -27,7 +27,7 @@ class _GetLocationPageState extends State<GetLocationPage> {
                       userLocation = value;
                     });
                   })
-                : Text('https://www.metaweather.com/api/location/search/?lattlong='+userLocation["latitude"].toString()+","+userLocation["longitude"].toString()),
+                : Text('http://www.metaweather.com/api/location/search/?lattlong='+userLocation["latitude"].toString()+","+userLocation["longitude"].toString()),
 
             //todo Substring woeid
             // 'https://www.metaweather.com/api/location/search/?lattlong='+userLocation["latitude"].toString()+","+userLocation["longitude"].toString()
