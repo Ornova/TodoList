@@ -61,16 +61,12 @@ getWoeid() {
          {"id":6086074159857664,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"S","created":"2019-06-26T14:59:40.207626Z","applicable_date":"2019-07-04","min_temp":13.25,"max_temp":19.55,"the_temp":19.55,"wind_speed":3.1068559611866697,"wind_direction":186.99999999999997,"air_pressure":1011.5,"humidity":68,"visibility":null,"predictability":68},
          {"id":5749953374715904,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SSW","created":"2019-06-26T11:59:42.115796Z","applicable_date":"2019-07-04","min_temp":12.15,"max_temp":18.17,"the_temp":18.17,"wind_speed":4.0202716137755505,"wind_direction":194.99999999999997,"air_pressure":1009.52,"humidity":68,"visibility":null,"predictability":68},
          {"id":4736260146987008,"weather_state_name":"Heavy Cloud","weather_state_abbr":"hc","wind_direction_compass":"S","created":"2019-06-26T08:59:41.092654Z","applicable_date":"2019-07-04","min_temp":15.03,"max_temp":22.86,"the_temp":21.16,"wind_speed":1.6404199475065617,"wind_direction":181.0,"air_pressure":1012.31,"humidity":59,"visibility":null,"predictability":71}]'
-    int ende_weather_state_abbr;
-    int start_weather_state_abbr;
-    int ende_min_temp;
-    int start_min_temp;
-    int ende_the_temp;
-    int start_the_temp;
-    ende_weather_state_abbr = string.indexOf('wind_direction_compass');
-    ende_weather_state_abbr = ende_weather_state_abbr - 3;
-    start_weather_state_abbr = string.indexOf('weather_state_abbr');
-    start_weather_state_abbr = start_weather_state_abbr + 21;
+    int ende;
+    int start;
+    ende = string.indexOf('wind_direction_compass');
+    ende = ende - 3;
+    start = string.indexOf('weather_state_abbr');
+    start = start + 21;
     string = string.substring(start_weather_state_abbr, ende_weather_state_abbr);
 
     ende_weather_the_temp = string.indexOf('wind_speed');

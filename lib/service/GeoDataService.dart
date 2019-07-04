@@ -1,14 +1,29 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 class GetLocationPage extends StatefulWidget {
   @override
-  _GetLocationPageState createState() => _GetLocationPageState();
+  _GetLocationPageState createState() =>
+      _GetLocationPageState(httpClient: http.Client());
 }
 
 class _GetLocationPageState extends State<GetLocationPage> {
+  //http
+  final http.Client httpClient;
+
+  //date
+  var now = new DateTime.now();
+  String date = '';
+
+  //helping
+  int useless = 0;
+
+  _GetLocationPageState({@required this.httpClient})
+      : assert(httpClient != null);
   var location = new Location();
 
   Map<String, double> userLocation;
@@ -27,18 +42,26 @@ class _GetLocationPageState extends State<GetLocationPage> {
                       userLocation = value;
                     });
                   })
-                : Text('http://www.metaweather.com/api/location/search/?lattlong='+userLocation["latitude"].toString()+","+userLocation["longitude"].toString()),
+                : Text(cutYear() + "/" + cutMonth() + "/" + cutDay()),
+            useless == 0
+                ? getWeather().then((value) {
+                    setState(() {
+                      useless = 1;
+                    });
+                  })
+                : Container(
+                child: Row(
+              children: <Widget>[
 
+              ],
+            ))
             //todo Substring woeid
             // 'https://www.metaweather.com/api/location/search/?lattlong='+userLocation["latitude"].toString()+","+userLocation["longitude"].toString()
             // https://www.metaweather.com/api/location/search/?lattlong=47.377060,8.539550
 
-
             //todo Wetter
             // https://www.metaweather.com/api/#location
             // 'https://www.metaweather.com/api/location/'+getWoeid()+'/'
-
-
           ],
         ),
       ),
@@ -55,16 +78,91 @@ class _GetLocationPageState extends State<GetLocationPage> {
     return currentLocation;
   }
 
-  getWoeid() {
-    String string =
-        '[{"title":"San Francisco","location_type":"City","woeid":2487956,"latt_long":"37.777119, -122.41964"},{"title":"San Diego","location_type":"City","woeid":2487889,"latt_long":"32.715691,-117.161720"},{"title":"San Jose","location_type":"City","woeid":2488042,"latt_long":"37.338581,-121.885567"},{"title":"San Antonio","location_type":"City","woeid":2487796,"latt_long":"29.424580,-98.494614"},{"title":"Santa Cruz","location_type":"City","woeid":2488853,"latt_long":"36.974018,-122.030952"},{"title":"Santiago","location_type":"City","woeid":349859,"latt_long":"-33.463039,-70.647942"},{"title":"Santorini","location_type":"City","woeid":56558361,"latt_long":"36.406651,25.456530"},{"title":"Santander","location_type":"City","woeid":773964,"latt_long":"43.461498,-3.810010"},{"title":"Busan","location_type":"City","woeid":1132447,"latt_long":"35.170429,128.999481"},{"title":"Santa Cruz de Tenerife","location_type":"City","woeid":773692,"latt_long":"28.46163,-16.267059"},{"title":"Santa Fe","location_type":"City","woeid":2488867,"latt_long":"35.666431,-105.972572"}]';
-    int ende;
-    int start;
-    ende = string.indexOf('latt_long');
-    ende = ende - 2;
-    start = string.indexOf('woeid');
-    start = start + 7;
-    string = string.substring(start, ende);
-    return string;
+  getWoeid() async {
+    final locationUrl =
+        'http://www.metaweather.com/api/location/search/?lattlong=' +
+            userLocation["latitude"].toString() +
+            "," +
+            userLocation["longitude"].toString();
+    final locationResponse = await this.httpClient.get(locationUrl);
+    print(locationUrl);
+    if (locationResponse.statusCode != 200) {
+      throw Exception('error getting locationId for city');
+    }
+    final locationJson = jsonDecode(locationResponse.body) as List;
+    return (locationJson.first)['woeid'];
   }
+
+  //weather_state_abbr
+  //min_temp
+  //the_temp
+  getWeather() async {
+    String string = '';
+    final weatherUrl = 'http://www.metaweather.com/api/location/' +
+        getWoeid().toString() +
+        '/' +
+        cutYear().toString() +
+        '/' +
+        cutMonth().toString() +
+        '/' +
+        cutDay().toString() +
+        '/';
+    final weatherResponse = await this.httpClient.get(weatherUrl);
+    print(weatherUrl);
+    useless = 1;
+    if (weatherResponse.statusCode != 200) {
+      throw Exception('error getting locationId for city');
+    }
+    final weatherJson = jsonDecode(weatherResponse.body) as List;
+    string = (weatherJson.first)['weather_state_abbr'];
+    string = string + " " + (weatherJson.first)['min_temp'];
+    string = string + " " + (weatherJson.first)['the_temp'];
+  }
+
+  //fullDate with -
+  cutDate() {
+    now = new DateTime.now();
+    now.toString();
+    int start = 0;
+    int ende = 10;
+    return date = now.toString().substring(start, ende);
+  }
+
+  //year
+  cutYear() {
+    String year = cutDate();
+    int start = 0;
+    int ende = 4;
+    return date = now.toString().substring(start, ende);
+  }
+
+  //month
+  cutMonth() {
+    String month = cutDate();
+    int start = 5;
+    int ende = 7;
+    return date = now.toString().substring(start, ende);
+  }
+
+  //day
+  cutDay() {
+    String day = cutDate();
+    int start = 8;
+    int ende = 10;
+    return date = now.toString().substring(start, ende);
+  }
+
+//  getWoeid2() {
+//    getWoeid().then((res) {
+//      String string = res;
+//      int ende;
+//      int start;
+//      ende = string.indexOf('latt_long');
+//      ende = ende - 2;
+//      start = string.indexOf('woeid');
+//      start = start + 7;
+//      string = string.substring(start, ende);
+//      return string;
+//    });
+//  }
 }
