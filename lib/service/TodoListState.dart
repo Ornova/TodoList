@@ -1,6 +1,7 @@
 import 'package:cookie_of_the_day/model/TodoList.dart';
 import 'package:flutter/material.dart';
 import 'package:cookie_of_the_day/service/GeoDataService.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TodoListState extends State<TodoList> {
   List<String> _todoItems = [];
@@ -11,10 +12,17 @@ class TodoListState extends State<TodoList> {
     if (task.length > 0) {
       // Putting our code inside "setState" tells the app that our state has changed, and
       // it will automatically re-render the list
+      _incrementCounter(task);
       setState(() => _todoItems.add(task));
     }
   }
-
+  _incrementCounter(String i) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String string ='';
+    string = string +"";
+    print(string);
+    await prefs.setString('string', string);
+  }
   void _removeTodoItem(int index) {
     setState(() => _todoItems.removeAt(index));
   }

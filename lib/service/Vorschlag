@@ -1,88 +1,142 @@
-weather_state_abbr
-min_temp
-the_temp
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:location/location.dart';
+import 'package:flutter/services.dart';
 
-getWoeid() {
-    String string =
-        '[{"id":6577717321400320,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"SW","created":"2019-07-03T08:59:19.824325Z","applicable_date":"2019-07-04","min_temp":10.94,"max_temp":18.405,"the_temp":19.14,"wind_speed":6.395199073260161,"wind_direction":229.65240473344863,"air_pressure":1012.11,"humidity":71,"visibility":12.606068062514913,"predictability":73},
-         {"id":6708863464112128,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"SW","created":"2019-07-03T05:59:22.869549Z","applicable_date":"2019-07-04","min_temp":10.94,"max_temp":18.405,"the_temp":20.25,"wind_speed":5.768858673260159,"wind_direction":229.65240473344863,"air_pressure":1013.11,"humidity":70,"visibility":11.455909985683608,"predictability":73},
-         {"id":6714056763244544,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"WSW","created":"2019-07-03T02:59:23.402807Z","applicable_date":"2019-07-04","min_temp":10.82,"max_temp":18.33,"the_temp":19.435,"wind_speed":6.450111939926828,"wind_direction":242.4980874263724,"air_pressure":1012.11,"humidity":71,"visibility":11.961395450568679,"predictability":73},
-         {"id":5793891829678080,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"WSW","created":"2019-07-02T23:59:23.880644Z","applicable_date":"2019-07-04","min_temp":11.05,"max_temp":17.17,"the_temp":18.119999999999997,"wind_speed":6.28855542994512,"wind_direction":242.4980874263724,"air_pressure":1013.165,"humidity":79,"visibility":11.961395450568679,"predictability":73},
-         {"id":6069752747261952,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"SW","created":"2019-07-02T20:59:23.167619Z","applicable_date":"2019-07-04","min_temp":11.329999999999998,"max_temp":16.77,"the_temp":17.775,"wind_speed":6.273228148028845,"wind_direction":231.35706140995944,"air_pressure":1012.89,"humidity":81,"visibility":12.093747514515231,"predictability":73},
-         {"id":6028165115805696,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"WSW","created":"2019-07-02T17:59:23.115082Z","applicable_date":"2019-07-04","min_temp":11.405,"max_temp":16.675,"the_temp":18.32,"wind_speed":6.388141014695511,"wind_direction":241.33124695729958,"air_pressure":1012.89,"humidity":80,"visibility":11.52550355921419,"predictability":73},
-         {"id":4653416280227840,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"WSW","created":"2019-07-02T14:59:23.579620Z","applicable_date":"2019-07-04","min_temp":11.405,"max_temp":16.675,"the_temp":17.87,"wind_speed":6.529813248028844,"wind_direction":241.33124695729958,"air_pressure":1012.89,"humidity":80,"visibility":12.294139724011771,"predictability":73},
-         {"id":4926051006283776,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"WSW","created":"2019-07-02T11:59:22.671153Z","applicable_date":"2019-07-04","min_temp":11.190000000000001,"max_temp":18.025,"the_temp":19.105,"wind_speed":6.587033746981628,"wind_direction":240.99789015330234,"air_pressure":1011.97,"humidity":73,"visibility":12.294139724011771,"predictability":73},
-         {"id":4559381058289664,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"WSW","created":"2019-07-02T08:59:22.566405Z","applicable_date":"2019-07-04","min_temp":11.205,"max_temp":18.265,"the_temp":18.880000000000003,"wind_speed":6.719592515188633,"wind_direction":242.04014290211168,"air_pressure":1011.925,"humidity":74,"visibility":11.924423864630558,"predictability":73},
-         {"id":5490769815142400,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"WSW","created":"2019-07-02T05:59:25.885881Z","applicable_date":"2019-07-04","min_temp":11.205,"max_temp":18.265,"the_temp":20.200000000000003,"wind_speed":5.727886881855298,"wind_direction":242.04014290211168,"air_pressure":1013.425,"humidity":73,"visibility":12.253129225324107,"predictability":73},
-         {"id":5464262015188992,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"WSW","created":"2019-07-02T02:59:26.278008Z","applicable_date":"2019-07-04","min_temp":11.01,"max_temp":17.835,"the_temp":19.98,"wind_speed":6.151487181855298,"wind_direction":242.8315512913539,"air_pressure":1013.425,"humidity":72,"visibility":12.054911815000398,"predictability":73},
-         {"id":6006401698627584,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"WSW","created":"2019-07-01T23:59:25.977772Z","applicable_date":"2019-07-04","min_temp":11.08,"max_temp":16.165,"the_temp":17.31,"wind_speed":6.652724617776187,"wind_direction":240.19370357667205,"air_pressure":1012.845,"humidity":82,"visibility":11.409928517458045,"predictability":73},
-         {"id":5582356637286400,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"WSW","created":"2019-07-01T20:59:25.817138Z","applicable_date":"2019-07-04","min_temp":11.26,"max_temp":15.879999999999999,"the_temp":17.810000000000002,"wind_speed":6.61047156546568,"wind_direction":240.26062845302965,"air_pressure":1012.85,"humidity":81,"visibility":10.524474568519844,"predictability":73},
-         {"id":5525869227409408,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"WSW","created":"2019-07-01T17:59:26.531527Z","applicable_date":"2019-07-04","min_temp":11.26,"max_temp":15.879999999999999,"the_temp":17.810000000000002,"wind_speed":6.61047156546568,"wind_direction":240.26062845302965,"air_pressure":1012.85,"humidity":81,"visibility":10.524474568519844,"predictability":73},
-         {"id":6101042389319680,"weather_state_name":"Heavy Cloud","weather_state_abbr":"hc","wind_direction_compass":"WSW","created":"2019-07-01T14:59:26.207061Z","applicable_date":"2019-07-04","min_temp":11.26,"max_temp":15.879999999999999,"the_temp":17.634999999999998,"wind_speed":6.528450798799014,"wind_direction":240.26062845302965,"air_pressure":1012.85,"humidity":80,"visibility":11.865704286964128,"predictability":71},
-         {"id":5687863570071552,"weather_state_name":"Heavy Cloud","weather_state_abbr":"hc","wind_direction_compass":"WSW","created":"2019-07-01T11:59:26.603104Z","applicable_date":"2019-07-04","min_temp":10.795,"max_temp":15.735000000000001,"the_temp":17.645,"wind_speed":6.852906642514383,"wind_direction":241.00987066511624,"air_pressure":1012.25,"humidity":80,"visibility":11.296217589278612,"predictability":71},
-         {"id":4788981419999232,"weather_state_name":"Heavy Cloud","weather_state_abbr":"hc","wind_direction_compass":"WSW","created":"2019-07-01T08:59:25.929402Z","applicable_date":"2019-07-04","min_temp":10.795,"max_temp":15.735000000000001,"the_temp":17.645,"wind_speed":6.852906642514383,"wind_direction":241.00987066511624,"air_pressure":1012.25,"humidity":80,"visibility":11.296217589278612,"predictability":71},
-         {"id":5350152908832768,"weather_state_name":"Heavy Cloud","weather_state_abbr":"hc","wind_direction_compass":"WSW","created":"2019-07-01T05:59:29.981558Z","applicable_date":"2019-07-04","min_temp":10.795,"max_temp":15.735000000000001,"the_temp":17.645,"wind_speed":6.852906642514383,"wind_direction":241.00987066511624,"air_pressure":1012.25,"humidity":80,"visibility":11.296217589278612,"predictability":71},
-         {"id":6451820958318592,"weather_state_name":"Heavy Cloud","weather_state_abbr":"hc","wind_direction_compass":"WSW","created":"2019-07-01T02:59:29.191875Z","applicable_date":"2019-07-04","min_temp":10.945,"max_temp":15.915000000000001,"the_temp":17.645,"wind_speed":6.652906642514382,"wind_direction":241.00987066511624,"air_pressure":1012.25,"humidity":79,"visibility":11.296217589278612,"predictability":71},
-         {"id":6198511706046464,"weather_state_name":"Heavy Cloud","weather_state_abbr":"hc","wind_direction_compass":"WSW","created":"2019-06-30T23:59:28.763533Z","applicable_date":"2019-07-04","min_temp":10.945,"max_temp":15.915000000000001,"the_temp":17.645,"wind_speed":6.652906642514382,"wind_direction":241.00987066511624,"air_pressure":1012.25,"humidity":79,"visibility":11.296217589278612,"predictability":71},
-         {"id":5683345264476160,"weather_state_name":"Heavy Cloud","weather_state_abbr":"hc","wind_direction_compass":"WSW","created":"2019-06-30T20:59:28.897523Z","applicable_date":"2019-07-04","min_temp":11.485,"max_temp":15.77,"the_temp":17.7,"wind_speed":6.497564263925342,"wind_direction":241.1123321406109,"air_pressure":1012.655,"humidity":80,"visibility":12.097786427264774,"predictability":71},
-         {"id":5405595446280192,"weather_state_name":"Heavy Cloud","weather_state_abbr":"hc","wind_direction_compass":"WSW","created":"2019-06-30T17:59:29.223355Z","applicable_date":"2019-07-04","min_temp":11.485,"max_temp":15.77,"the_temp":17.95,"wind_speed":6.62432363059201,"wind_direction":241.1123321406109,"air_pressure":1012.655,"humidity":79,"visibility":11.868189771733078,"predictability":71},
-         {"id":6191038785912832,"weather_state_name":"Heavy Cloud","weather_state_abbr":"hc","wind_direction_compass":"WSW","created":"2019-06-30T14:59:30.386001Z","applicable_date":"2019-07-04","min_temp":11.61,"max_temp":15.684999999999999,"the_temp":17.44,"wind_speed":6.6109902972586765,"wind_direction":240.4352087979122,"air_pressure":1012.655,"humidity":80,"visibility":12.537406545772686,"predictability":71},
-         {"id":6479797838413824,"weather_state_name":"Heavy Cloud","weather_state_abbr":"hc","wind_direction_compass":"WSW","created":"2019-06-30T11:59:28.510710Z","applicable_date":"2019-07-04","min_temp":10.86,"max_temp":17.08,"the_temp":18.29,"wind_speed":6.751834434165805,"wind_direction":240.34097990835232,"air_pressure":1012.115,"humidity":74,"visibility":12.537406545772686,"predictability":71},
-         {"id":5806878053367808,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"SSW","created":"2019-06-30T08:59:28.522126Z","applicable_date":"2019-07-04","min_temp":10.86,"max_temp":17.08,"the_temp":15.96,"wind_speed":5.575599101248708,"wind_direction":197.5,"air_pressure":1010.23,"humidity":80,"visibility":9.999726596675416,"predictability":73},
-         {"id":6042517139095552,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"SSW","created":"2019-06-30T05:59:32.601845Z","applicable_date":"2019-07-04","min_temp":10.985,"max_temp":17.505000000000003,"the_temp":15.96,"wind_speed":5.3705991012487075,"wind_direction":201.5,"air_pressure":1010.23,"humidity":79,"visibility":9.999726596675416,"predictability":73},
-         {"id":4535045773590528,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"SSW","created":"2019-06-30T02:59:31.314360Z","applicable_date":"2019-07-04","min_temp":11.17,"max_temp":15.855,"the_temp":13.75,"wind_speed":5.109623200509027,"wind_direction":203.5,"air_pressure":1012.46,"humidity":86,"visibility":9.999726596675416,"predictability":73},
-         {"id":5127518782750720,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"SSW","created":"2019-06-29T23:59:31.793068Z","applicable_date":"2019-07-04","min_temp":11.15,"max_temp":16.035,"the_temp":13.75,"wind_speed":5.169623200509028,"wind_direction":203.99999999999997,"air_pressure":1012.46,"humidity":84,"visibility":9.999726596675416,"predictability":73},
-         {"id":5741150168154112,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"SSW","created":"2019-06-29T20:59:31.766261Z","applicable_date":"2019-07-04","min_temp":11.15,"max_temp":16.035,"the_temp":13.75,"wind_speed":5.169623200509028,"wind_direction":203.99999999999997,"air_pressure":1012.46,"humidity":84,"visibility":9.999726596675416,"predictability":73},
-         {"id":5561924940988416,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"SSW","created":"2019-06-29T17:59:31.967804Z","applicable_date":"2019-07-04","min_temp":11.15,"max_temp":16.035,"the_temp":13.75,"wind_speed":5.169623200509028,"wind_direction":203.99999999999997,"air_pressure":1012.46,"humidity":84,"visibility":9.999726596675416,"predictability":73},
-         {"id":6460706977218560,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"SSW","created":"2019-06-29T14:59:32.164464Z","applicable_date":"2019-07-04","min_temp":11.15,"max_temp":16.035,"the_temp":13.75,"wind_speed":5.169623200509028,"wind_direction":203.99999999999997,"air_pressure":1012.46,"humidity":84,"visibility":9.999726596675416,"predictability":73},
-         {"id":5175373186727936,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"SSW","created":"2019-06-29T11:59:32.502387Z","applicable_date":"2019-07-04","min_temp":11.15,"max_temp":16.035,"the_temp":13.75,"wind_speed":5.169623200509028,"wind_direction":203.99999999999997,"air_pressure":1012.46,"humidity":84,"visibility":9.999726596675416,"predictability":73},
-         {"id":5603442632425472,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"S","created":"2019-06-29T08:59:31.724137Z","applicable_date":"2019-07-04","min_temp":10.995000000000001,"max_temp":17.385,"the_temp":15.88,"wind_speed":4.864385389326334,"wind_direction":184.0,"air_pressure":1010.73,"humidity":78,"visibility":9.999726596675416,"predictability":73},
-         {"id":5236848932683776,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"S","created":"2019-06-29T05:59:35.201196Z","applicable_date":"2019-07-04","min_temp":10.995000000000001,"max_temp":17.385,"the_temp":15.88,"wind_speed":4.864385389326334,"wind_direction":184.0,"air_pressure":1010.73,"humidity":78,"visibility":9.999726596675416,"predictability":73},
-         {"id":5375848691531776,"weather_state_name":"Showers","weather_state_abbr":"s","wind_direction_compass":"S","created":"2019-06-29T02:59:35.294573Z","applicable_date":"2019-07-04","min_temp":10.995000000000001,"max_temp":17.385,"the_temp":15.88,"wind_speed":4.864385389326334,"wind_direction":184.0,"air_pressure":1010.73,"humidity":78,"visibility":9.999726596675416,"predictability":73},
-         {"id":6004452601364480,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SW","created":"2019-06-28T23:59:34.514838Z","applicable_date":"2019-07-04","min_temp":12.73,"max_temp":19.445,"the_temp":20.47,"wind_speed":5.296238367931281,"wind_direction":215.99999999999997,"air_pressure":1012.05,"humidity":71,"visibility":9.999726596675416,"predictability":68},
-         {"id":5551453810720768,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SW","created":"2019-06-28T20:59:34.401362Z","applicable_date":"2019-07-04","min_temp":12.73,"max_temp":19.445,"the_temp":20.47,"wind_speed":5.296238367931281,"wind_direction":215.99999999999997,"air_pressure":1012.05,"humidity":71,"visibility":9.999726596675416,"predictability":68},
-         {"id":6671940313939968,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SW","created":"2019-06-28T17:59:35.089997Z","applicable_date":"2019-07-04","min_temp":12.73,"max_temp":19.445,"the_temp":20.47,"wind_speed":5.296238367931281,"wind_direction":215.99999999999997,"air_pressure":1012.05,"humidity":71,"visibility":9.999726596675416,"predictability":68},
-         {"id":4607469244383232,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SW","created":"2019-06-28T14:59:34.978821Z","applicable_date":"2019-07-04","min_temp":12.73,"max_temp":19.445,"the_temp":20.47,"wind_speed":5.296238367931281,"wind_direction":215.99999999999997,"air_pressure":1012.05,"humidity":71,"visibility":9.999726596675416,"predictability":68},
-         {"id":5775526000066560,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SW","created":"2019-06-28T11:59:35.015941Z","applicable_date":"2019-07-04","min_temp":12.73,"max_temp":19.445,"the_temp":20.47,"wind_speed":5.296238367931281,"wind_direction":215.99999999999997,"air_pressure":1012.05,"humidity":71,"visibility":9.999726596675416,"predictability":68},
-         {"id":6098407011647488,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SW","created":"2019-06-28T08:59:35.242891Z","applicable_date":"2019-07-04","min_temp":13.09,"max_temp":19.77,"the_temp":20.47,"wind_speed":5.191238367931281,"wind_direction":220.49999999999997,"air_pressure":1012.05,"humidity":69,"visibility":9.999726596675416,"predictability":68},
-         {"id":6200942779170816,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SW","created":"2019-06-28T05:59:37.512286Z","applicable_date":"2019-07-04","min_temp":13.09,"max_temp":19.77,"the_temp":20.47,"wind_speed":5.191238367931281,"wind_direction":220.49999999999997,"air_pressure":1012.05,"humidity":69,"visibility":9.999726596675416,"predictability":68},
-         {"id":4823113122447360,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SW","created":"2019-06-28T02:59:37.941469Z","applicable_date":"2019-07-04","min_temp":13.09,"max_temp":19.77,"the_temp":20.47,"wind_speed":5.191238367931281,"wind_direction":220.49999999999997,"air_pressure":1012.05,"humidity":69,"visibility":9.999726596675416,"predictability":68},
-         {"id":5127231300960256,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SW","created":"2019-06-27T23:59:37.621809Z","applicable_date":"2019-07-04","min_temp":13.09,"max_temp":19.77,"the_temp":20.47,"wind_speed":5.191238367931281,"wind_direction":220.49999999999997,"air_pressure":1012.05,"humidity":69,"visibility":9.999726596675416,"predictability":68},
-         {"id":6179944147189760,"weather_state_name":"Light Cloud","weather_state_abbr":"lc","wind_direction_compass":"SW","created":"2019-06-27T20:59:38.287613Z","applicable_date":"2019-07-04","min_temp":12.559999999999999,"max_temp":18.57,"the_temp":20.47,"wind_speed":5.391238367931281,"wind_direction":215.49999999999997,"air_pressure":1012.05,"humidity":73,"visibility":9.999726596675416,"predictability":70},
-         {"id":6555907477471232,"weather_state_name":"Light Cloud","weather_state_abbr":"lc","wind_direction_compass":"SW","created":"2019-06-27T17:59:37.803364Z","applicable_date":"2019-07-04","min_temp":12.559999999999999,"max_temp":18.57,"the_temp":20.47,"wind_speed":5.391238367931281,"wind_direction":215.49999999999997,"air_pressure":1012.05,"humidity":73,"visibility":9.999726596675416,"predictability":70},
-         {"id":5137777995808768,"weather_state_name":"Light Cloud","weather_state_abbr":"lc","wind_direction_compass":"SW","created":"2019-06-27T14:59:37.822885Z","applicable_date":"2019-07-04","min_temp":12.559999999999999,"max_temp":18.57,"the_temp":20.47,"wind_speed":5.391238367931281,"wind_direction":215.49999999999997,"air_pressure":1012.05,"humidity":73,"visibility":9.999726596675416,"predictability":70},
-         {"id":6050058711597056,"weather_state_name":"Light Cloud","weather_state_abbr":"lc","wind_direction_compass":"SSW","created":"2019-06-27T11:59:37.800596Z","applicable_date":"2019-07-04","min_temp":12.21,"max_temp":17.840000000000003,"the_temp":19.01,"wind_speed":5.428520639465521,"wind_direction":210.99999999999997,"air_pressure":1012.73,"humidity":75,"visibility":9.999726596675416,"predictability":70},
-         {"id":5839746095906816,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SSW","created":"2019-06-27T08:59:37.325714Z","applicable_date":"2019-07-04","min_temp":12.05,"max_temp":19.01,"the_temp":19.01,"wind_speed":2.6470412789310425,"wind_direction":193.99999999999997,"air_pressure":1012.73,"humidity":67,"visibility":null,"predictability":68},
-         {"id":6647801511411712,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SSW","created":"2019-06-27T05:59:41.421694Z","applicable_date":"2019-07-04","min_temp":12.16,"max_temp":21.06,"the_temp":21.06,"wind_speed":2.9390857392825898,"wind_direction":204.99999999999997,"air_pressure":1011.15,"humidity":59,"visibility":null,"predictability":68},
-         {"id":5340197174640640,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SSW","created":"2019-06-27T02:59:41.622122Z","applicable_date":"2019-07-04","min_temp":12.16,"max_temp":21.06,"the_temp":21.06,"wind_speed":2.9390857392825898,"wind_direction":204.99999999999997,"air_pressure":1011.15,"humidity":59,"visibility":null,"predictability":68},
-         {"id":5879676687876096,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"S","created":"2019-06-26T23:59:42.348257Z","applicable_date":"2019-07-04","min_temp":13.25,"max_temp":19.55,"the_temp":19.55,"wind_speed":3.1068559611866697,"wind_direction":186.99999999999997,"air_pressure":1011.5,"humidity":68,"visibility":null,"predictability":68},
-         {"id":6530343282671616,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"S","created":"2019-06-26T20:59:40.742461Z","applicable_date":"2019-07-04","min_temp":13.25,"max_temp":19.55,"the_temp":19.55,"wind_speed":3.1068559611866697,"wind_direction":186.99999999999997,"air_pressure":1011.5,"humidity":68,"visibility":null,"predictability":68},
-         {"id":6310997222490112,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"S","created":"2019-06-26T17:59:41.206446Z","applicable_date":"2019-07-04","min_temp":13.25,"max_temp":19.55,"the_temp":19.55,"wind_speed":3.1068559611866697,"wind_direction":186.99999999999997,"air_pressure":1011.5,"humidity":68,"visibility":null,"predictability":68},
-         {"id":6086074159857664,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"S","created":"2019-06-26T14:59:40.207626Z","applicable_date":"2019-07-04","min_temp":13.25,"max_temp":19.55,"the_temp":19.55,"wind_speed":3.1068559611866697,"wind_direction":186.99999999999997,"air_pressure":1011.5,"humidity":68,"visibility":null,"predictability":68},
-         {"id":5749953374715904,"weather_state_name":"Clear","weather_state_abbr":"c","wind_direction_compass":"SSW","created":"2019-06-26T11:59:42.115796Z","applicable_date":"2019-07-04","min_temp":12.15,"max_temp":18.17,"the_temp":18.17,"wind_speed":4.0202716137755505,"wind_direction":194.99999999999997,"air_pressure":1009.52,"humidity":68,"visibility":null,"predictability":68},
-         {"id":4736260146987008,"weather_state_name":"Heavy Cloud","weather_state_abbr":"hc","wind_direction_compass":"S","created":"2019-06-26T08:59:41.092654Z","applicable_date":"2019-07-04","min_temp":15.03,"max_temp":22.86,"the_temp":21.16,"wind_speed":1.6404199475065617,"wind_direction":181.0,"air_pressure":1012.31,"humidity":59,"visibility":null,"predictability":71}]'
-    int ende_weather_state_abbr;
-    int start_weather_state_abbr;
-    int ende_min_temp;
-    int start_min_temp;
-    int ende_the_temp;
-    int start_the_temp;
-    ende_weather_state_abbr = string.indexOf('wind_direction_compass');
-    ende_weather_state_abbr = ende_weather_state_abbr - 3;
-    start_weather_state_abbr = string.indexOf('weather_state_abbr');
-    start_weather_state_abbr = start_weather_state_abbr + 21;
-    string = string.substring(start_weather_state_abbr, ende_weather_state_abbr);
+import 'package:flutter_weather/widgets/Weather.dart';
+import 'package:flutter_weather/widgets/WeatherItem.dart';
+import 'package:flutter_weather/models/WeatherData.dart';
+import 'package:flutter_weather/models/ForecastData.dart';
 
-    ende_weather_the_temp = string.indexOf('wind_speed');
-    ende_weather_the_temp = ende_the_temp - 2;
-    start_weather_the_temp = string.indexOf('the_temp');
-    start_weather_the_temp = start_the_temp + 10;
-    string = string.substring(start_weather_state_abbr, ende_weather_state_abbr);
+void main() => runApp(new MyApp());
 
-    ende_min_temp = string.indexOf('max_temp');
-    ende_min_temp = ende_min_temp - 2;
-    start_min_temp = string.indexOf('min_temp');
-    start_min_temp= start_min_temp + 10;
-    string = string.substring(start_weather_state_abbr, ende_weather_state_abbr);
-    return string;
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return new MyAppState();
   }
+}
+
+class MyAppState extends State<MyApp> {
+  bool isLoading = false;
+  WeatherData weatherData;
+  ForecastData forecastData;
+  Location _location = new Location();
+  String error;
+
+  @override
+  void initState() {
+    super.initState();
+
+    loadWeather();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Weather App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        backgroundColor: Colors.blueGrey,
+        appBar: AppBar(
+          title: Text('Flutter Weather App'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: weatherData != null ? Weather(weather: weatherData) : Container(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: isLoading ? CircularProgressIndicator(
+                        strokeWidth: 2.0,
+                        valueColor: new AlwaysStoppedAnimation(Colors.white),
+                      ) : IconButton(
+                        icon: new Icon(Icons.refresh),
+                        tooltip: 'Refresh',
+                        onPressed: loadWeather,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 200.0,
+                    child: forecastData != null ? ListView.builder(
+                        itemCount: forecastData.list.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => WeatherItem(weather: forecastData.list.elementAt(index))
+                    ) : Container(),
+                  ),
+                ),
+              )
+            ]
+          )
+        )
+      ),
+    );
+  }
+
+  loadWeather() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    Map<String, double> location;
+
+    try {
+      location = await _location.getLocation;
+
+      error = null;
+    } on PlatformException catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        error = 'Permission denied';
+      } else if (e.code == 'PERMISSION_DENIED_NEVER_ASK') {
+        error = 'Permission denied - please ask the user to enable it from the app settings';
+      }
+
+      location = null;
+    }
+
+    if (location != null) {
+      final lat = location['latitude'];
+      final lon = location['longitude'];
+
+      final weatherResponse = await http.get(
+          'https://api.openweathermap.org/data/2.5/weather?APPID=0721392c0ba0af8c410aa9394defa29e&lat=${lat
+              .toString()}&lon=${lon.toString()}');
+      final forecastResponse = await http.get(
+          'https://api.openweathermap.org/data/2.5/forecast?APPID=0721392c0ba0af8c410aa9394defa29e&lat=${lat
+              .toString()}&lon=${lon.toString()}');
+
+      if (weatherResponse.statusCode == 200 &&
+          forecastResponse.statusCode == 200) {
+        return setState(() {
+          weatherData =
+          new WeatherData.fromJson(jsonDecode(weatherResponse.body));
+          forecastData =
+          new ForecastData.fromJson(jsonDecode(forecastResponse.body));
+          isLoading = false;
+        });
+      }
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+}

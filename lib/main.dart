@@ -30,7 +30,7 @@ class TodoApp extends StatelessWidget {
             body1: TextStyle(fontSize: 30.0, fontFamily: 'Roboto'),
           ),
         ),
-       title: 'Todo List',
-       home: new TodoList());
- }
+        title: 'Todo List',
+        home: new TodoList());
+  }
 }
