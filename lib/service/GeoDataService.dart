@@ -28,7 +28,9 @@ class _GetLocationPageState extends State<GetLocationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: new Text('Weather'),
+        ),
         body: Center(
             child: Column(
                 mainAxisSize: MainAxisSize.min,

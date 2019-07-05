@@ -2,10 +2,12 @@ import 'package:cookie_of_the_day/model/TodoList.dart';
 import 'package:flutter/material.dart';
 import 'package:cookie_of_the_day/service/GeoDataService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cookie_of_the_day/widgets/Weather.dart';
 
 class TodoListState extends State<TodoList> {
   List<String> _todoItems = [];
   GetLocationPage glp = new GetLocationPage();
+  Weather weather;
 
   void _addTodoItem(String task) {
     // Only add the task if the user actually entered something
@@ -16,13 +18,15 @@ class TodoListState extends State<TodoList> {
       setState(() => _todoItems.add(task));
     }
   }
+
   _incrementCounter(String i) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String string ='';
-    string = string +"";
+    String string = '';
+    string = string + "";
     print(string);
     await prefs.setString('string', string);
   }
+
   void _removeTodoItem(int index) {
     setState(() => _todoItems.removeAt(index));
   }
@@ -82,37 +86,27 @@ class TodoListState extends State<TodoList> {
       appBar: new AppBar(
         title: new Text('Todo List'),
         actions: <Widget>[
-
           new IconButton(
-
-              //todo monentary weather
-
-              icon: new Icon(Icons.location_on),
-
+              icon: new Icon(Icons.wb_sunny),
               onPressed: () {
-
                 showDialog(
-
                     context: context,
-
                     builder: (context) {
-
                       return GetLocationPage();
-
                     });
-
               }),
           new IconButton(
-              icon: new Icon(Icons.menu),
+              icon: new Text('???'),
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      Future.delayed(Duration(seconds: 4), () {
-                        Navigator.of(context).pop(true);
-                      });
                       return AlertDialog(
-                        title: Text('Not yet implemented'), //Todo),
+                        title: Text('You pressed the help button. '+
+                            'If you want to add a new thing you will have to do, '+
+                                'please press the button in the right corner on the bottom. '+
+                        'If you want to know what the weather is like at your position at the moment, '+
+                            'please press the sun icon in the navigtion bar.'), //Todo),
                       );
                     });
               }),
