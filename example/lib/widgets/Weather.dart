@@ -12,7 +12,7 @@ class Weather extends StatelessWidget {
     return Column(
       children: <Widget>[
         Text(weather.name, style: new TextStyle(color: Colors.white)),
-        Text(weather.main, style: new TextStyle(color: Colors.white, fontSize: 32.0)),
+        Text(weather.main, style: new TextStyle(color: Colors.white, fontSize: 22.0)),
         Text('${weather.temp.toString().substring(0,2)}°C',  style: new TextStyle(color: Colors.white)),
         Image.network('https://openweathermap.org/img/w/${weather.icon}.png'),
         Text(new DateFormat.yMMMd().format(weather.date), style: new TextStyle(color: Colors.white)),
@@ -20,4 +20,9 @@ class Weather extends StatelessWidget {
       ],
     );
   }
+
+  getImg() {
+    Image.network('https://openweathermap.org/img/w/${weather.icon}.png');
+  }
+
 }
