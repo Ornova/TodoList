@@ -2,6 +2,7 @@ import 'package:flutter_ringtone_player_example/model/TodoList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ringtone_player_example/service/GeoDataService.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
+import 'package:vibration/vibration.dart';
 
 class TodoListState extends State<TodoList> {
   List<String> _todoItems = [];
@@ -18,6 +19,7 @@ class TodoListState extends State<TodoList> {
   }
 
   void _removeTodoItem(int index) {
+    Vibration.vibrate(duration: 100);
     setState(() => _todoItems.removeAt(index));
   }
 
