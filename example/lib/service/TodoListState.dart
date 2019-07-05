@@ -36,7 +36,6 @@ class TodoListState extends State<TodoList> {
                 new FlatButton(
                     child: new Text('MARK AS DONE'),
                     onPressed: () {
-
                       FlutterRingtonePlayer.playNotification();
                       _removeTodoItem(index);
                       Navigator.of(context).pop();
@@ -88,17 +87,14 @@ class TodoListState extends State<TodoList> {
                     });
               }),
           new IconButton(
-              icon: new Text('???'),
+              icon: new Text('Help'),
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text('You pressed the help button. '+
-                            'If you want to add a new thing you will have to do, '+
-                            'please press the button in the right corner on the bottom. '+
-                            'If you want to know what the weather is like at your position at the moment, '+
-                            'please press the sun icon in the navigtion bar.'), //Todo),
+                        title: Text(
+                            'To use this feature the GPS settings must be set to high precision.'), //Todo),
                       );
                     });
               }),
@@ -119,9 +115,7 @@ class TodoListState extends State<TodoList> {
   }
 
   void _pushAddTodoScreen() {
-    Navigator.of(context).push(
-
-        new MaterialPageRoute(builder: (context) {
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
       return new Scaffold(
           appBar: new AppBar(
             title: new Text('Add a new task'),
